@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-dpl
+  namespace: principal
+  labels:
+    app: postgres-dpl
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: postgres-dpl
+  template:
+    metadata:
+      labels:
+        app: postgres-dpl
+    spec:
+      containers:   
+      - name: postgres-dpl
+        image: guilhermebehs/postgres_pessoal:1.5
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+     

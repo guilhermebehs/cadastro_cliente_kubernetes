@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-dpl
+  namespace: principal
+  labels:
+    app: backend-dpl
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: backend-dpl
+  template:
+    metadata:
+      labels:
+        app: backend-dpl
+    spec:
+      containers:   
+      - name: backend-dpl
+        image: guilhermebehs/cadastro_cliente_kubernetes:1.5
+        envFrom:
+         - configMapRef:
+            name: backend-config
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+     

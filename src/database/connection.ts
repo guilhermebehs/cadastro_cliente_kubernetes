@@ -21,11 +21,18 @@ export default class Connection{
 
     public getConnection(): Sequelize{
 
-      const con =  new Sequelize (this.#db, this.#user, this.#password, {
-          host: this.#host,
-          port: this.#port,
-          dialect: 'postgres'
-      })
+        let dataCon: any = 
+            {
+                host: this.#host,
+    //          port: this.#port,
+                dialect: 'postgres'
+            }
+         
+        if(this.#port != undefined)
+          dataCon['port'] = this.#port
+        
+
+      const con =  new Sequelize (this.#db, this.#user, this.#password, dataCon)
      
       return con;
     }
